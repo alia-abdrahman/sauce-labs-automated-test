@@ -34,10 +34,21 @@ public class SauceLabsAppTest extends BaseTest {
                 .login("standard_user", "secret_sauce");
 
         inventoryPage
+                .clickFilterToSortByAlphabeticalAscOrder()
+                .verifyProductIsSortedByAlphabeticalAscOrder()
+                .clickFilterToSortByAlphabeticalDescOrder()
+                .verifyProductIsSortedByAlphabeticalDescOrder()
+                .clickFilterToSortByPriceAscOrder()
+                .verifyProductIsSortedByPriceAscOrder()
+                .clickFilterToSortByPriceDescOrder()
+                .verifyProductIsSortedByPriceDescOrder()
+                .verifyOnesieProductisDisplayed()
                 .clickAddToCartButton()
+                .verifyShoppingCartBadgeisDisplayed()
                 .clickShoppingCartButton();
 
         cartPage
+                .verifyItemsAddedToCart()
                 .clickCheckoutButton();
 
         checkoutInfoPage
@@ -47,9 +58,11 @@ public class SauceLabsAppTest extends BaseTest {
                 .clickContinueButton();
 
         checkoutOverviewPage
+                .verifyPaymentOverviewisDisplayed()
                 .clickFinishButton();
 
         checkoutCompletePage
+                .verifyCheckoutCompleteMessageisDisplayed()
                 .clickBackToProductsButton();
 
     }

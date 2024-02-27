@@ -33,6 +33,36 @@ public class InventoryPage extends BasePage {
     @FindBy(xpath = "//a[@class='shopping_cart_link']")
     private WebElement shoppingCartButton;
 
+    @FindBy(xpath = "//img[@alt='Sauce Labs Onesie']")
+    private WebElement onesieProductImg;
+
+    @FindBy(xpath = "//div[@class='inventory_item_name '][contains(.,'Sauce Labs Onesie')]")
+    private WebElement onesieProductName;
+
+    @FindBy(xpath = "//div[contains(text(),'Rib snap infant onesie for the junior automation e')]")
+    private WebElement onesieProductDesc;
+
+    @FindBy(xpath = "//div[@class='inventory_item_price'][contains(.,'$7.99')]")
+    private WebElement onesieProductPrice;
+
+    @FindBy (xpath = "//span[@class='shopping_cart_badge']")
+    private WebElement shoppingCartBadge;
+
+    @FindBy (xpath = "//select[@class='product_sort_container']")
+    private WebElement FilterToSort;
+
+    @FindBy (xpath = "//option[@value='az']")
+    private WebElement FilterToSortByAlphabeticalAscOrder;
+
+    @FindBy (xpath = "//option[@value='za']")
+    private WebElement FilterToSortByAlphabeticalDescOrder;
+
+    @FindBy (xpath = "//option[@value='lohi']")
+    private WebElement FilterToSortByPriceAscOrder;
+
+    @FindBy (xpath = "//option[@value='hilo']")
+    private WebElement FilterToSortByPriceDescOrder;
+
     // Constructor
     public InventoryPage(WebDriver driver) {
 
@@ -93,6 +123,110 @@ public class InventoryPage extends BasePage {
     // Verify remove button is displayed
     public InventoryPage verifyRemoveButton() {
         Assert.assertTrue(removeButton.isDisplayed(), "Remove button is not displayed");
+        return this;
+    }
+
+    public InventoryPage verifyOnesieProductisDisplayed() {
+        Assert.assertTrue(onesieProductImg.isDisplayed(), "Onesie product image is not displayed");
+        Assert.assertTrue(onesieProductName.isDisplayed(), "Onesie product name is not displayed");
+        Assert.assertTrue(onesieProductDesc.isDisplayed(), "Onesie product description is not displayed");
+        Assert.assertTrue(onesieProductPrice.isDisplayed(), "Onesie product price is not displayed");
+        return this;
+
+    }
+
+    public InventoryPage verifyShoppingCartBadgeisDisplayed() {
+        Assert.assertTrue(shoppingCartBadge.isDisplayed(), "Shopping cart badge is not displayed");
+        return this;
+    }
+
+    public InventoryPage clickFilterToSortByAlphabeticalAscOrder() {
+
+        // First, ensure the dropdown is visible and clickable
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(FilterToSort));
+
+        // Click on the dropdown to expand it
+        FilterToSort.click();
+
+        // Wait for the option to be clickable
+        wait.until(ExpectedConditions.elementToBeClickable(FilterToSortByAlphabeticalAscOrder));
+
+        // Click on the desired option
+        FilterToSortByAlphabeticalAscOrder.click();
+
+        return this;
+    }
+
+    public InventoryPage verifyProductIsSortedByAlphabeticalAscOrder() {
+        Assert.assertTrue(FilterToSortByAlphabeticalAscOrder.isDisplayed(), "Product is not sorted by alphabetical ascending order");
+        return this;
+    }
+
+    public InventoryPage clickFilterToSortByAlphabeticalDescOrder() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(FilterToSort));
+
+
+        FilterToSort.click();
+
+
+        wait.until(ExpectedConditions.elementToBeClickable(FilterToSortByAlphabeticalDescOrder));
+
+
+        FilterToSortByAlphabeticalDescOrder.click();
+
+        return this;
+    }
+
+    public InventoryPage verifyProductIsSortedByAlphabeticalDescOrder() {
+        Assert.assertTrue(FilterToSortByAlphabeticalDescOrder.isDisplayed(), "Product is not sorted by alphabetical descending order");
+        return this;
+    }
+
+    public InventoryPage clickFilterToSortByPriceAscOrder() {
+
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(FilterToSort));
+
+
+        FilterToSort.click();
+
+
+        wait.until(ExpectedConditions.elementToBeClickable(FilterToSortByPriceAscOrder));
+
+
+        FilterToSortByPriceAscOrder.click();
+
+        return this;
+    }
+
+    public InventoryPage verifyProductIsSortedByPriceAscOrder() {
+        Assert.assertTrue(FilterToSortByPriceAscOrder.isDisplayed(), "Product is not sorted by price ascending order");
+        return this;
+    }
+
+    public InventoryPage clickFilterToSortByPriceDescOrder() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(FilterToSort));
+
+
+        FilterToSort.click();
+
+
+        wait.until(ExpectedConditions.elementToBeClickable(FilterToSortByPriceDescOrder));
+
+
+        FilterToSortByPriceDescOrder.click();
+
+        return this;
+    }
+
+    public InventoryPage verifyProductIsSortedByPriceDescOrder() {
+        Assert.assertTrue(FilterToSortByPriceDescOrder.isDisplayed(), "Product is not sorted by price descending order");
         return this;
     }
 

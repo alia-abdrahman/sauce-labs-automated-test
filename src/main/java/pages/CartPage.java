@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 
@@ -19,6 +20,9 @@ public class CartPage extends BasePage {
     @FindBy(xpath = "//button[@id='checkout']")
     private WebElement checkoutButton;
 
+    @FindBy(xpath = "//div[@class='cart_item']")
+    private WebElement cartItem;
+
 
     public CartPage(WebDriver driver) {
         super(driver); // Call the constructor of the BasePage class
@@ -27,6 +31,12 @@ public class CartPage extends BasePage {
     }
 
     // ACTIONS
+
+    public CartPage verifyItemsAddedToCart() {
+    Assert.assertTrue(cartItem.isDisplayed(), "Item not added to cart");
+    return this;
+    }
+
 
     // Click checkout button
     public CartPage clickCheckoutButton() {
